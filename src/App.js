@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import Register from "./components/Register";
+import PrivateRoute from "./helpers/PrivateRoute";
+import ProjectContextProvider from "./contexts/project/ProjectContext";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import TaskContextProvider from "./contexts/task/TaskContext";
+import AuthContextProvider from "./contexts/auth/AuthContext";
+import { setHeaders } from "./services/axios";
+
+//sin esto no vamos a poder cargar los projectos pq no se
+
+const token = localStorage.getItem("token");
+if (token) {
+  setHeaders(token);
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <AuthContextProvider>
+          <ProjectContextProvider>
+            <TaskContextProvider>
+              <PrivateRoute exact path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+            </TaskContextProvider>
+          </ProjectContextProvider>
+        </AuthContextProvider>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

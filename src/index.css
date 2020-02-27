@@ -1,13 +1,77 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: "Raleway", sans-serif;
+  list-style: none;
+  color: #293040;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background: #293040;
+}
+
+.form-title {
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.danger {
+  border: 1px solid red !important;
+}
+
+.taska-enter,
+.project-enter {
+  opacity: 0;
+}
+.taska-enter-active,
+.project-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.taska-exit,
+.project-exit {
+  opacity: 1;
+}
+.taska-exit-active,
+.project-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+/* home container*/
+.home-container {
+  display: grid;
+  grid-template-areas:
+    "aside nav"
+    "aside content";
+  grid-template-columns: 25% 1fr;
+  grid-template-rows: 12% 1fr;
+  height: 100vh;
+}
+
+.home-content {
+  background: white;
+}
+
+.home-content h2 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 992px) {
+  .home-container {
+    grid-template-columns: 35% 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    grid-template-areas:
+      "nav"
+      "aside"
+      "content";
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% auto 1fr;
+    background: #fff;
+  }
 }
